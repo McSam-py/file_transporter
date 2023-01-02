@@ -3,6 +3,13 @@ import socket
 import os
 import time
 
+if len(sys.argv) != 3 or sys.arv[1] == "help" or sys.argv[1] == "--help" or sys.argv[1] == "-h":
+    print("""Usage:
+    python3 send.py <server_to_send_file_to> <port_of_destination_server> <full_path_to_file>\n
+Example:
+    python3 send.py 192.168.34.1 8989 /root/Desktop/test.jpg
+        """)
+    sys.exit()
 
 lhost = sys.argv[1]
 lport = int(sys.argv[2])
