@@ -43,7 +43,7 @@ def send_image_bytes(host, port):
         sock.send(("[..] Sending File").encode())
         bytes_sent = 1024
         start_bytes = 0
-        remaining_size = 0
+
         for i in range((file_size_to_send // 1024) + 1):
             time.sleep(0.05)
             sock.send(file_bytes_to_send[start_bytes:bytes_sent])

@@ -44,3 +44,7 @@ def receive_data():
 
         else:
             pass
+
+
+receive_data()
+sock.close()  # Close socket connection
