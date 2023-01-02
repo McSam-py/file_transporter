@@ -16,3 +16,33 @@ def get_image_bytes(path):
 
     file_name = path.split("/")[-1]
     return file_bytes, file_size, file_name
+
+
+def send_image_bytes(host, port):
+    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    sock.connect((host, port))
+
+    file_bytes_to_send, file_size_to_send, file_name_to_send = get_image_bytes(
+        file_path)
+
+    sock.send(
+        (f"File Name: {file_name_to_send}\nFile Size: {file_size_to_send}").encode())
+
+    print(f"File Name: {file_name_to_send}\nFile Size: {file_size_to_send}")
+
+    send_data = input("\nEnter yes if you want to send the file: (yes/no) ")
+
+    if send_data.lower() == "yes":
+        sock.send(("[..] Sending File").encode())
+        bytes_sent = 1024
+        start_bytes = 0
+        remaining_size = 0
+        for i in range((file_size_to_send // 1024) + 1):
+            time.sleep(0.05)
+            sock.send(file_bytes_to_send[start_bytes:bytes_sent])
+            start_bytes = bytes_sent
+            bytes_sent *= 2
+
+    else:
+        print("[-] Closing program..")
+        sys.exit()
